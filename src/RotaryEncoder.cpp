@@ -38,12 +38,15 @@ const int8_t KNOBDIR[] = {
 
 // ----- Initialization and Default Values -----
 
-RotaryEncoder::RotaryEncoder(int pin1, int pin2, LatchMode mode)
+RotaryEncoder::RotaryEncoder(int pin1, int pin2, LatchMode mode, int id)
 {
   // Remember Hardware Setup
   _pin1 = pin1;
   _pin2 = pin2;
   _mode = mode;
+
+  // Remember the ID
+  _id = id;
 
   // Setup the input pins and turn on pullup resistor
   pinMode(pin1, INPUT_PULLUP);
@@ -58,6 +61,9 @@ RotaryEncoder::RotaryEncoder(int pin1, int pin2, LatchMode mode)
   _positionExtPrev = 0;
 } // RotaryEncoder()
 
+int RotaryEncoder::getID(){
+ return _id;
+}
 
 long RotaryEncoder::getPosition()
 {

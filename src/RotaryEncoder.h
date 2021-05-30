@@ -13,6 +13,7 @@
 // 16.06.2019 pin initialization using INPUT_PULLUP
 // 10.11.2020 Added the ability to obtain the encoder RPM
 // 29.01.2021 Options for using rotary encoders with 2 state changes per latch.
+// 30.05.2021 @hossgifford Added getID() int property to help handling multiple encoders 
 // -----
 
 #ifndef RotaryEncoder_h
@@ -36,7 +37,7 @@ public:
   };
 
   // ----- Constructor -----
-  RotaryEncoder(int pin1, int pin2, LatchMode mode = LatchMode::FOUR0);
+  RotaryEncoder(int pin1, int pin2, LatchMode mode = LatchMode::FOUR0, int id = -1);
 
   // retrieve the current position
   long getPosition();
@@ -56,8 +57,12 @@ public:
   // Returns the RPM
   unsigned long getRPM();
 
+  // Returns the ID
+  int getID();
+
 private:
   int _pin1, _pin2; // Arduino pins used for the encoder.
+  int _id; // index id which is useful when handling multiple encoders.
   
   LatchMode _mode; // Latch mode from initialization
 
